@@ -3,93 +3,108 @@
  */
 
 
-var counterRectangle = 0;
-function incrementRectangle(e){
-    var x = e.clientX - canvas.width;
-    var y = e.clientY - 0;
-    var dist = Math.sqrt(y*y + x*x);
-    if (dist<100){
-        counterRectangle++;
+var counterRect1 = 0;
+function incrementRect1(e){
+    var x = e.clientX;
+    var y = e.clientY;
+    if (x > 50 && x < 150 && y > 70 && y < 170){
+        counterRect1++;
         redraw();
     }
-
 }
 
-var click2 = 0;
-function increment2(e){
-    var x = e.clientX - 0;
-    var y = e.clientY - 0;
-    var dist = Math.sqrt(y*y + x*x);
-    if (dist<100){
-        click2++;
+var counterRect2 = 0;
+function incrementRect2(e){
+    var x = e.clientX;
+    var y = e.clientY;
+    if (x > 350 && x < 450 && y > 70 && y < 170){
+        counterRect2++;
         redraw();
     }
-
 }
 
-var click3 = 0;
-function increment3(e){
-    var x = 330 - e.clientX;
-    var y = e.clientY + 80;
+var counterCir1 = 0;
+function incrementCir1(e){
+    var x = 250 - e.clientX;
+    var y = 115 - e.clientY;
     var dist = Math.sqrt(y*y + x*x);
     if (dist<50){
-        click3++;
+        counterCir1++;
         redraw();
     }
+}
 
+var counterCir2 = 0;
+function incrementCir2(e){
+    var x = 550 - e.clientX;
+    var y = 115 - e.clientY;
+    var dist = Math.sqrt(y*y + x*x);
+    if (dist<50){
+        counterCir2++;
+        redraw();
+    }
+}
+
+var counterTotal = 0;
+function incrementTotal (){
+    counterTotal = counterRect1 + counterRect2 + counterCir1 + counterCir2;
 }
 
 
 var canvas = document.getElementById('canvas');
-canvas.addEventListener('click', incrementRectangle);
-canvas.addEventListener('click', increment2);
-canvas.addEventListener('click', increment3);
 
-var ctx = canvas.getContext('2d');
+canvas.addEventListener('click', incrementRect1);
+canvas.addEventListener('click', incrementRect2);
+canvas.addEventListener('click', incrementCir1);
+canvas.addEventListener('click', incrementCir2);
 
-function redrawRectangle() {
-    //draw the rectangle
-    ctx.strokeRect(100, 50, 100, 100);
+
+var ctx = canvas.getContext("2d");
+
+function redrawRect1 () {
+    ctx.strokeRect(50, 70, 100, 100);
     ctx.font = "20px Verdana";
-    ctx.fillText("Клики: " + click1, 100, 200);
+    ctx.fillText("Клики: " + counterRect1, 53, 220);
 }
 
-function redraw2() {
-    //draw the triangle
-    ctx.beginPath();
-    ctx.moveTo(250, 151);
-    ctx.lineTo(380, 151);
-    ctx.lineTo(310, 46);
-    ctx.fill();
-    ctx.font = "20px Verdana";
-    ctx.fillText("Клики: " + click2, 270, 200);
 
+
+function redrawRect2 () {
+    ctx.strokeRect(350, 70, 100, 100);
+    ctx.font = "20px Verdana";
+    ctx.fillText("Клики: " + counterRect2, 355, 220);
 }
 
-function redraw3() {
-    // draw the circle
+
+function redrawCir1() {
     ctx.beginPath();
-    ctx.arc(480, 100, 50, 0, Math.PI * 2);
-    ctx.moveTo(110, 75);
+    ctx.arc(250, 115, 50, 0, Math.PI * 2);
     ctx.stroke();
-    ctx.fillText("Клики: " + click3, 430, 200);
+    ctx.font = "20px Verdana";
+    ctx.fillText("Клики: " + counterCir1, 200, 220);
+
+}
+
+
+function redrawCir2() {
+    ctx.beginPath();
+    ctx.arc(550, 115, 50, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.font = "20px Verdana";
+    ctx.fillText("Клики: " + counterCir2, 500, 220);
 
 }
 
 function redraw() {
+    incrementTotal()
     ctx.clearRect(0,0,canvas.width, canvas.height);
-    redrawRectangle()
-    redraw2()
-    redraw3()
+    ctx.stroke();
+    ctx.font = "20px Verdana";
+    ctx.fillText("Сумма кликов: " + counterTotal, 250, 250);
+    redrawRect1();
+    redrawRect2();
+    redrawCir1();
+    redrawCir2();
 }
 
-redraw()
-
-
-    //ctx.font = "20px Verdana";
-    //ctx.fillText("Клики: " + click, 100, 200);
-    //ctx.fillText("Клики: " + click, 270, 200);
-    //ctx.fillText("Клики: " + click, 430, 200);
-
-
-
+redraw();
