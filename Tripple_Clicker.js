@@ -50,7 +50,6 @@ function incrementTotal (){
     counterTotal = counterRect1 + counterRect2 + counterCir1 + counterCir2;
 }
 
-
 var canvas = document.getElementById('canvas');
 
 canvas.addEventListener('click', incrementRect1);
