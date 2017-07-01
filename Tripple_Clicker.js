@@ -75,23 +75,21 @@ function redrawRect2 () {
 }
 
 
-function redrawCir1() {
-    ctx.beginPath();
-    ctx.arc(250, 115, 50, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.font = "20px Verdana";
-    ctx.fillText("Клики: " + counterCir1, 200, 220);
+function drawCircle(centerX, centerY, radius, counter) {
+    ctx.beginPath()
+    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2)
+    ctx.stroke()
+    ctx.font = "20px Verdana"
+    ctx.fillText("Клики: " + counter, centerX - 50, centerY + radius + 50)
+}
 
+function redrawCir1() {
+    drawCircle(250, 115, 50, counterCir1)
 }
 
 
 function redrawCir2() {
-    ctx.beginPath();
-    ctx.arc(550, 115, 50, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.font = "20px Verdana";
-    ctx.fillText("Клики: " + counterCir2, 500, 220);
-
+    drawCircle(550, 115, 70, counterCir2)
 }
 
 function redraw() {
